@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+		DBAB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/CredentialRenewal.swift */ = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CredentialRenewal.swift; sourceTree = SOURCE_ROOT; };
+		DBAB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/CredentialRenewal.swift in Sources */ = { isa = PBXBuildFile; fileRef = DBAB126E76AC4AA9A0FA62B1; };
+		DAAB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PostTimestamp.swift */ = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostTimestamp.swift; sourceTree = SOURCE_ROOT; };
+		DAAB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PostTimestamp.swift in Sources */ = { isa = PBXBuildFile; fileRef = DAAB126E76AC4AA9A0FA62B1; };
+		CAAB126E76AC4AA9A0FA62B3 /* Sources/OpenBookCore/CustomEmoji.swift */ = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CustomEmoji.swift; sourceTree = SOURCE_ROOT; };
+		CAAB126E76AC4AA9A0FA62B4 /* Sources/OpenBookCore/CustomEmoji.swift in Sources */ = { isa = PBXBuildFile; fileRef = CAAB126E76AC4AA9A0FA62B3; };
+		CAAB126E76AC4AA9A0FA62B1 /* App/CustomEmojiText.swift */ = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/CustomEmojiText.swift; sourceTree = SOURCE_ROOT; };
+		CAAB126E76AC4AA9A0FA62B2 /* App/CustomEmojiText.swift in Sources */ = { isa = PBXBuildFile; fileRef = CAAB126E76AC4AA9A0FA62B1; };
+		FBAB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/ImageZoom.swift */ = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/ImageZoom.swift; sourceTree = SOURCE_ROOT; };
+		FBAB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/ImageZoom.swift in Sources */ = { isa = PBXBuildFile; fileRef = FBAB126E76AC4AA9A0FA62B1; };
+		EAAB126E76AC4AA9A0FA62B1 /* App/PostImageViewer.swift */ = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostImageViewer.swift; sourceTree = SOURCE_ROOT; };
+		EAAB126E76AC4AA9A0FA62B2 /* App/PostImageViewer.swift in Sources */ = { isa = PBXBuildFile; fileRef = EAAB126E76AC4AA9A0FA62B1; };
+
+/* Begin PBXBuildFile section */
+		0D6C83246CE0B16A4A1AE511 /* Sources/OpenBookCore/PostMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633A7C5E651936796166A74 /* Sources/OpenBookCore/PostMarkdown.swift */; };
+		144851D86A1671FAB6B6F825 /* App/KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB124EB97FF5B085C8D0E85 /* App/KeychainStore.swift */; };
+		1AED35F51C531CF22CE81124 /* App/BrowserAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BC6912DFB2C4682877C176 /* App/BrowserAuthentication.swift */; };
+		2F6E327DF27FC70386CC008A /* App/OpenBookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B2C92E80DE10FC85FA98F6 /* App/OpenBookApp.swift */; };
+		391810473412F6672193B0B4 /* Sources/OpenBookCore/Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930626057EFDF972D0078FA8 /* Sources/OpenBookCore/Instance.swift */; };
+		3CB106E0D64B6A256CC798FF /* App/AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF4832684381827E6A1BB6C /* App/AppNavigation.swift */; };
+		514F8CA3EA7137C21680EBA1 /* OpenBookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D069509556BFAFFC25586CC3 /* OpenBookCore.framework */; };
+		5CC0A470361909C3F69772CC /* Sources/OpenBookCore/PostComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEFF356EB21F848CEEB035A /* Sources/OpenBookCore/PostComposer.swift */; };
+		6928E22696EFB5BAD99B2FAE /* Sources/OpenBookCore/APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DB836857256E95182A9E7D /* Sources/OpenBookCore/APIClient.swift */; };
+		6CE010E563F00DA01F31B07C /* App/PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8863E7C24431086285FFFDC /* App/PostListView.swift */; };
+		6F1183C3A87714FC0ABC8894 /* App/PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3935A4FBC0F617EE7435ADF7 /* App/PeopleView.swift */; };
+		733E68B850F7CAD738E946FC /* App/MarkdownPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC660567FCB567C99CC557F /* App/MarkdownPostView.swift */; };
+		85A5AFECDB65E023213277A8 /* App/TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1418341971551D202DC2AF /* App/TimelineView.swift */; };
+		8D12D89EF89523710B42B8AA /* App/NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D602190CC742BAFBD658967 /* App/NewPostView.swift */; };
+		9092DB90F33E713C834FEB00 /* Sources/OpenBookCore/PostLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFDF9C5C1356D34C63B5FCE /* Sources/OpenBookCore/PostLikes.swift */; };
+		919EF8862BA1AC78A2A5E1BC /* Sources/OpenBookCore/PostManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AEF3618E7DCEE1AA39D379 /* Sources/OpenBookCore/PostManagement.swift */; };
+		AA10232AAE6D1BD1C2B35516 /* Sources/OpenBookCore/PostFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5310A229D620A4D77B61EB28 /* Sources/OpenBookCore/PostFeed.swift */; };
+		ABAA5EF4BAD0E84E879C041A /* App/PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F362A8899E95740A1597C368 /* App/PostDetailView.swift */; };
+		ADBB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/IncomingFollowRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/IncomingFollowRequests.swift */; };
+		ADBB126E76AC4AA9A0FA62B4 /* App/FollowRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBB126E76AC4AA9A0FA62B3 /* App/FollowRequestsView.swift */; };
+		B487126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PostAnnounces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B487126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PostAnnounces.swift */; };
+		BDC074DD3DFB9327046C61BA /* Sources/OpenBookCore/OAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBFD8F11DE81D4DD6D415E /* Sources/OpenBookCore/OAuth.swift */; };
+		C077DBFF551A25DE194DA0E4 /* App/ProfileExplorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23AC32C94FA45B9C1CA0B28 /* App/ProfileExplorer.swift */; };
+		C17F365EA3538E051E2D4D56 /* Sources/OpenBookCore/PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620587243A9F47AA24AA51C4 /* Sources/OpenBookCore/PostDetail.swift */; };
+		C378B4C00E76DBE9EED52CF9 /* Sources/OpenBookCore/Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDFB515E234039D0A681E23 /* Sources/OpenBookCore/Posts.swift */; };
+		CFB7126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PersonFollows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PersonFollows.swift */; };
+		D0876DE8261DC3D7FDEB2D94 /* App/AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF2C0908FA1A949F0857078 /* App/AppStore.swift */; };
+		F0AB126E76AC4AA9A0FA62B2 /* App/Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AB126E76AC4AA9A0FA62B1 /* App/Assets.xcassets */; };
+		F4DBF95FDA5EC5E1E9AEB164 /* App/EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D5F2D56B01210960ECE177 /* App/EditPostView.swift */; };
+		F5C2753BD6F50E287952F722 /* Sources/OpenBookCore/Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3843CFE97786CB2656EB34E5 /* Sources/OpenBookCore/Models.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D799BAE6088A90139B415FCC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 744DBEE4E0A69DC936004899;
+			remoteInfo = OpenBookCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0112DAE3F84CB4DF5179BE01 /* App/Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App/Info.plist; sourceTree = SOURCE_ROOT; };
+		0CB124EB97FF5B085C8D0E85 /* App/KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/KeychainStore.swift; sourceTree = SOURCE_ROOT; };
+		0FEFF356EB21F848CEEB035A /* Sources/OpenBookCore/PostComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostComposer.swift; sourceTree = SOURCE_ROOT; };
+		2E1418341971551D202DC2AF /* App/TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/TimelineView.swift; sourceTree = SOURCE_ROOT; };
+		3633A7C5E651936796166A74 /* Sources/OpenBookCore/PostMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostMarkdown.swift; sourceTree = SOURCE_ROOT; };
+		3843CFE97786CB2656EB34E5 /* Sources/OpenBookCore/Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/Models.swift; sourceTree = SOURCE_ROOT; };
+		3935A4FBC0F617EE7435ADF7 /* App/PeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PeopleView.swift; sourceTree = SOURCE_ROOT; };
+		3BF2C0908FA1A949F0857078 /* App/AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppStore.swift; sourceTree = SOURCE_ROOT; };
+		5310A229D620A4D77B61EB28 /* Sources/OpenBookCore/PostFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostFeed.swift; sourceTree = SOURCE_ROOT; };
+		54DB836857256E95182A9E7D /* Sources/OpenBookCore/APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/APIClient.swift; sourceTree = SOURCE_ROOT; };
+		5BDFB515E234039D0A681E23 /* Sources/OpenBookCore/Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/Posts.swift; sourceTree = SOURCE_ROOT; };
+		5D602190CC742BAFBD658967 /* App/NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/NewPostView.swift; sourceTree = SOURCE_ROOT; };
+		620587243A9F47AA24AA51C4 /* Sources/OpenBookCore/PostDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostDetail.swift; sourceTree = SOURCE_ROOT; };
+		69B2C92E80DE10FC85FA98F6 /* App/OpenBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/OpenBookApp.swift; sourceTree = SOURCE_ROOT; };
+		79A64683552F47F211D562F1 /* App/OpenBook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App/OpenBook.entitlements; sourceTree = SOURCE_ROOT; };
+		8BCD5BC4CDFDF0918087C782 /* OpenBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = OpenBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		90BC6912DFB2C4682877C176 /* App/BrowserAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/BrowserAuthentication.swift; sourceTree = SOURCE_ROOT; };
+		930626057EFDF972D0078FA8 /* Sources/OpenBookCore/Instance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/Instance.swift; sourceTree = SOURCE_ROOT; };
+		ABBBFD8F11DE81D4DD6D415E /* Sources/OpenBookCore/OAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/OAuth.swift; sourceTree = SOURCE_ROOT; };
+		ADBB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/IncomingFollowRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/IncomingFollowRequests.swift; sourceTree = SOURCE_ROOT; };
+		ADBB126E76AC4AA9A0FA62B3 /* App/FollowRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/FollowRequestsView.swift; sourceTree = SOURCE_ROOT; };
+		B3D5F2D56B01210960ECE177 /* App/EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/EditPostView.swift; sourceTree = SOURCE_ROOT; };
+		B487126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PostAnnounces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostAnnounces.swift; sourceTree = SOURCE_ROOT; };
+		BAC660567FCB567C99CC557F /* App/MarkdownPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/MarkdownPostView.swift; sourceTree = SOURCE_ROOT; };
+		C23AC32C94FA45B9C1CA0B28 /* App/ProfileExplorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/ProfileExplorer.swift; sourceTree = SOURCE_ROOT; };
+		CFB7126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PersonFollows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PersonFollows.swift; sourceTree = SOURCE_ROOT; };
+		D069509556BFAFFC25586CC3 /* OpenBookCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OpenBookCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8863E7C24431086285FFFDC /* App/PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostListView.swift; sourceTree = SOURCE_ROOT; };
+		DDF4832684381827E6A1BB6C /* App/AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppNavigation.swift; sourceTree = SOURCE_ROOT; };
+		E8AEF3618E7DCEE1AA39D379 /* Sources/OpenBookCore/PostManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostManagement.swift; sourceTree = SOURCE_ROOT; };
+		F0AB126E76AC4AA9A0FA62B1 /* App/Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = App/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		F362A8899E95740A1597C368 /* App/PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostDetailView.swift; sourceTree = SOURCE_ROOT; };
+		FFFDF9C5C1356D34C63B5FCE /* Sources/OpenBookCore/PostLikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostLikes.swift; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		78AE8C6BEB2A40A6D824CCEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				514F8CA3EA7137C21680EBA1 /* OpenBookCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4C0AF2E5997990815A7D5A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69F8D45498D7E20DA99BB780 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F0AB126E76AC4AA9A0FA62B1 /* App/Assets.xcassets */,
+				D8863E7C24431086285FFFDC /* App/PostListView.swift */,
+				ADBB126E76AC4AA9A0FA62B3 /* App/FollowRequestsView.swift */,
+				EAAB126E76AC4AA9A0FA62B1 /* App/PostImageViewer.swift */,
+				CAAB126E76AC4AA9A0FA62B1 /* App/CustomEmojiText.swift */,
+				DDF4832684381827E6A1BB6C /* App/AppNavigation.swift */,
+				F362A8899E95740A1597C368 /* App/PostDetailView.swift */,
+				B3D5F2D56B01210960ECE177 /* App/EditPostView.swift */,
+				5D602190CC742BAFBD658967 /* App/NewPostView.swift */,
+				BAC660567FCB567C99CC557F /* App/MarkdownPostView.swift */,
+				2E1418341971551D202DC2AF /* App/TimelineView.swift */,
+				3BF2C0908FA1A949F0857078 /* App/AppStore.swift */,
+				90BC6912DFB2C4682877C176 /* App/BrowserAuthentication.swift */,
+				0CB124EB97FF5B085C8D0E85 /* App/KeychainStore.swift */,
+				69B2C92E80DE10FC85FA98F6 /* App/OpenBookApp.swift */,
+				3935A4FBC0F617EE7435ADF7 /* App/PeopleView.swift */,
+				C23AC32C94FA45B9C1CA0B28 /* App/ProfileExplorer.swift */,
+				0112DAE3F84CB4DF5179BE01 /* App/Info.plist */,
+				79A64683552F47F211D562F1 /* App/OpenBook.entitlements */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		82C062CB28C8FF6C54323B56 /* OpenBookCore */ = {
+			isa = PBXGroup;
+			children = (
+				5310A229D620A4D77B61EB28 /* Sources/OpenBookCore/PostFeed.swift */,
+				620587243A9F47AA24AA51C4 /* Sources/OpenBookCore/PostDetail.swift */,
+				E8AEF3618E7DCEE1AA39D379 /* Sources/OpenBookCore/PostManagement.swift */,
+				0FEFF356EB21F848CEEB035A /* Sources/OpenBookCore/PostComposer.swift */,
+				FFFDF9C5C1356D34C63B5FCE /* Sources/OpenBookCore/PostLikes.swift */,
+				B487126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PostAnnounces.swift */,
+				CFB7126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PersonFollows.swift */,
+				ADBB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/IncomingFollowRequests.swift */,
+				FBAB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/ImageZoom.swift */,
+				DAAB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PostTimestamp.swift */,
+				DBAB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/CredentialRenewal.swift */,
+				CAAB126E76AC4AA9A0FA62B3 /* Sources/OpenBookCore/CustomEmoji.swift */,
+				3633A7C5E651936796166A74 /* Sources/OpenBookCore/PostMarkdown.swift */,
+				5BDFB515E234039D0A681E23 /* Sources/OpenBookCore/Posts.swift */,
+				54DB836857256E95182A9E7D /* Sources/OpenBookCore/APIClient.swift */,
+				930626057EFDF972D0078FA8 /* Sources/OpenBookCore/Instance.swift */,
+				3843CFE97786CB2656EB34E5 /* Sources/OpenBookCore/Models.swift */,
+				ABBBFD8F11DE81D4DD6D415E /* Sources/OpenBookCore/OAuth.swift */,
+			);
+			name = OpenBookCore;
+			sourceTree = "<group>";
+		};
+		E50290A24C49A459B43487C5 = {
+			isa = PBXGroup;
+			children = (
+				69F8D45498D7E20DA99BB780 /* App */,
+				82C062CB28C8FF6C54323B56 /* OpenBookCore */,
+				FBDC4F23F93125BBEEAE800C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FBDC4F23F93125BBEEAE800C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8BCD5BC4CDFDF0918087C782 /* OpenBook.app */,
+				D069509556BFAFFC25586CC3 /* OpenBookCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		744DBEE4E0A69DC936004899 /* OpenBookCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D303251AE5A78ACD8D4DDB4 /* Build configuration list for PBXNativeTarget "OpenBookCore" */;
+			buildPhases = (
+				B0145090C14EEA62E4BF6060 /* Sources */,
+				D4C0AF2E5997990815A7D5A1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenBookCore;
+			productName = OpenBookCore;
+			productReference = D069509556BFAFFC25586CC3 /* OpenBookCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C13732C8E715C9BEE4FA51C9 /* OpenBook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A296CF4B7E708AB4E80076A9 /* Build configuration list for PBXNativeTarget "OpenBook" */;
+			buildPhases = (
+				971ED9D05B25DB6C4D7680D4 /* Sources */,
+				78AE8C6BEB2A40A6D824CCEE /* Frameworks */,
+				F0AB126E76AC4AA9A0FA62B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE58E2B17C19600779694943 /* PBXTargetDependency */,
+			);
+			name = OpenBook;
+			productName = OpenBook;
+			productReference = 8BCD5BC4CDFDF0918087C782 /* OpenBook.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2710;
+			};
+			buildConfigurationList = 41A2CC2D5321B7BB2E956CA5 /* Build configuration list for PBXProject "OpenBook" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = it;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				it,
+				en,
+				Base,
+			);
+			mainGroup = E50290A24C49A459B43487C5;
+			productRefGroup = FBDC4F23F93125BBEEAE800C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C13732C8E715C9BEE4FA51C9 /* OpenBook */,
+				744DBEE4E0A69DC936004899 /* OpenBookCore */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F0AB126E76AC4AA9A0FA62B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0AB126E76AC4AA9A0FA62B2 /* App/Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		971ED9D05B25DB6C4D7680D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE010E563F00DA01F31B07C /* App/PostListView.swift in Sources */,
+				ADBB126E76AC4AA9A0FA62B4 /* App/FollowRequestsView.swift in Sources */,
+				EAAB126E76AC4AA9A0FA62B2 /* App/PostImageViewer.swift in Sources */,
+				CAAB126E76AC4AA9A0FA62B2 /* App/CustomEmojiText.swift in Sources */,
+				3CB106E0D64B6A256CC798FF /* App/AppNavigation.swift in Sources */,
+				ABAA5EF4BAD0E84E879C041A /* App/PostDetailView.swift in Sources */,
+				F4DBF95FDA5EC5E1E9AEB164 /* App/EditPostView.swift in Sources */,
+				8D12D89EF89523710B42B8AA /* App/NewPostView.swift in Sources */,
+				733E68B850F7CAD738E946FC /* App/MarkdownPostView.swift in Sources */,
+				85A5AFECDB65E023213277A8 /* App/TimelineView.swift in Sources */,
+				D0876DE8261DC3D7FDEB2D94 /* App/AppStore.swift in Sources */,
+				1AED35F51C531CF22CE81124 /* App/BrowserAuthentication.swift in Sources */,
+				144851D86A1671FAB6B6F825 /* App/KeychainStore.swift in Sources */,
+				2F6E327DF27FC70386CC008A /* App/OpenBookApp.swift in Sources */,
+				6F1183C3A87714FC0ABC8894 /* App/PeopleView.swift in Sources */,
+				C077DBFF551A25DE194DA0E4 /* App/ProfileExplorer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0145090C14EEA62E4BF6060 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA10232AAE6D1BD1C2B35516 /* Sources/OpenBookCore/PostFeed.swift in Sources */,
+				C17F365EA3538E051E2D4D56 /* Sources/OpenBookCore/PostDetail.swift in Sources */,
+				919EF8862BA1AC78A2A5E1BC /* Sources/OpenBookCore/PostManagement.swift in Sources */,
+				5CC0A470361909C3F69772CC /* Sources/OpenBookCore/PostComposer.swift in Sources */,
+				9092DB90F33E713C834FEB00 /* Sources/OpenBookCore/PostLikes.swift in Sources */,
+				B487126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PostAnnounces.swift in Sources */,
+				CFB7126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PersonFollows.swift in Sources */,
+				ADBB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/IncomingFollowRequests.swift in Sources */,
+				FBAB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/ImageZoom.swift in Sources */,
+				DAAB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PostTimestamp.swift in Sources */,
+				DBAB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/CredentialRenewal.swift in Sources */,
+				CAAB126E76AC4AA9A0FA62B4 /* Sources/OpenBookCore/CustomEmoji.swift in Sources */,
+				0D6C83246CE0B16A4A1AE511 /* Sources/OpenBookCore/PostMarkdown.swift in Sources */,
+				C378B4C00E76DBE9EED52CF9 /* Sources/OpenBookCore/Posts.swift in Sources */,
+				6928E22696EFB5BAD99B2FAE /* Sources/OpenBookCore/APIClient.swift in Sources */,
+				391810473412F6672193B0B4 /* Sources/OpenBookCore/Instance.swift in Sources */,
+				F5C2753BD6F50E287952F722 /* Sources/OpenBookCore/Models.swift in Sources */,
+				BDC074DD3DFB9327046C61BA /* Sources/OpenBookCore/OAuth.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE58E2B17C19600779694943 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 744DBEE4E0A69DC936004899 /* OpenBookCore */;
+			targetProxy = D799BAE6088A90139B415FCC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1BD3EC2284E1D1EAACF8A62F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACH_O_TYPE = staticlib;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
+				PRODUCT_BUNDLE_IDENTIFIER = it.brancatelli.openbook.mobile.core;
+				PRODUCT_NAME = OpenBookCore;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		5A485B880CD57FB1A6A04211 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACH_O_TYPE = staticlib;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++14";
+				PRODUCT_BUNDLE_IDENTIFIER = it.brancatelli.openbook.mobile.core;
+				PRODUCT_NAME = OpenBookCore;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5A8C91857F674E16E2724F47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = App/OpenBook.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7N73LAQU36;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_CFBundleName = OpenBook;
+				"INFOPLIST_KEY_NSPrincipalClass[sdk=macosx*]" = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = it.brancatelli.openbook.mobile;
+				PRODUCT_NAME = OpenBook;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "OpenBook TestFlight";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		89E1FD6268CC0F221A2BE178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		E6DE6C99132752C914FEF632 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		E9B2E96ABC5F6856F2BE79CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = App/OpenBook.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7N73LAQU36;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_CFBundleName = OpenBook;
+				"INFOPLIST_KEY_NSPrincipalClass[sdk=macosx*]" = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = it.brancatelli.openbook.mobile;
+				PRODUCT_NAME = OpenBook;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D303251AE5A78ACD8D4DDB4 /* Build configuration list for PBXNativeTarget "OpenBookCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A485B880CD57FB1A6A04211 /* Debug */,
+				1BD3EC2284E1D1EAACF8A62F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41A2CC2D5321B7BB2E956CA5 /* Build configuration list for PBXProject "OpenBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89E1FD6268CC0F221A2BE178 /* Debug */,
+				E6DE6C99132752C914FEF632 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A296CF4B7E708AB4E80076A9 /* Build configuration list for PBXNativeTarget "OpenBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9B2E96ABC5F6856F2BE79CF /* Debug */,
+				5A8C91857F674E16E2724F47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}

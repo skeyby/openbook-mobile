@@ -1,0 +1,41 @@
+[
+  {
+    "postId": "01900000-0000-7000-8000-000000000002",
+    "postUri": "https://example.org/posts/01900000-0000-7000-8000-000000000002",
+    "postAuthor": {
+      "personId": "01900000-0000-7000-8000-000000000001",
+      "personUsername": "alex",
+      "personDomain": "example.org",
+      "personName": "Alex Example",
+      "personAvatar": "https://example.org/images/alex.png"
+    },
+    "postContent": "A walk by the river.",
+    "postCW": false,
+    "postVisibility": "public",
+    "postPublishedAt": "2026-10-25T12:00:00Z",
+    "postAttributes": {
+      "postLocation": null
+    },
+    "postCounters": {
+      "postLikesCount": 3,
+      "postCommentsCount": 0,
+      "postAnnouncesCount": 1
+    },
+    "postMyInteractions": {
+      "postLiked": false,
+      "postAnnounced": false,
+      "postDirectAnnounced": false
+    },
+    "postTimelineAt": "2026-10-26T10:00:00Z",
+    "postAnnounce": {
+      "announceAuthor": {
+        "personId": "01900000-0000-7000-8000-000000000003",
+        "personUsername": "sam",
+        "personDomain": "example.org",
+        "personName": "Sam Example",
+        "personAvatar": "https://example.org/images/sam.png"
+      },
+      "announcePublishedAt": "2026-10-26T10:00:00Z"
+    }
+  }
+]

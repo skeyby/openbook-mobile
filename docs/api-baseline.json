@@ -1,0 +1,31 @@
+{
+  "sha256": "14e96d8cfdf3c22ca72ca6531aac1c5189c5f34dc17e4a60647cebff35cb8eac",
+  "version": "0.1.0-draft",
+  "operations": [
+    "DELETE /me/follow-requests/{personId}",
+    "DELETE /persons/{personId}/follow",
+    "DELETE /posts/{postId}",
+    "DELETE /posts/{postId}/announce",
+    "DELETE /posts/{postId}/like",
+    "GET /.well-known/oauth-authorization-server",
+    "GET /instance",
+    "GET /me",
+    "GET /me/follow-requests",
+    "GET /me/posts",
+    "GET /persons/{personId}",
+    "GET /persons/{personId}/follow",
+    "GET /persons/{personId}/followers",
+    "GET /persons/{personId}/following",
+    "GET /persons/{personId}/posts",
+    "GET /posts",
+    "GET /posts/{postId}",
+    "PATCH /me/follow-requests/{personId}",
+    "PATCH /posts/{postId}",
+    "POST /oauth/register",
+    "POST /oauth/token",
+    "POST /posts",
+    "PUT /persons/{personId}/follow",
+    "PUT /posts/{postId}/announce",
+    "PUT /posts/{postId}/like"
+  ]
+}

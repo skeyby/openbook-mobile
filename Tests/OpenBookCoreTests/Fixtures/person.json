@@ -1,0 +1,37 @@
+{
+  "personId": "2f8c1653-5b14-4f82-a5b9-921e50fa4267",
+  "personUri": "https://social.example.org/users/alex",
+  "personType": "person",
+  "personUsername": "alex",
+  "personDomain": "social.example.org",
+  "personStatus": "active",
+  "personPublishedAt": "2025-06-01T09:00:00Z",
+  "personProfile": {
+    "personName": "Alex Example",
+    "personSummary": "Music and photography.",
+    "personAvatar": "https://social.example.org/images/alex-avatar.png",
+    "personCoverImage": null,
+    "personFields": [
+      {
+        "label": "Occupation",
+        "value": "Musician"
+      },
+      {
+        "label": "Website",
+        "value": "https://alex.example.org"
+      }
+    ]
+  },
+  "personAttributes": {
+    "personDiscoverable": true,
+    "personIndexable": true,
+    "personFollowApproval": false,
+    "personCustomEmojis": {},
+    "personAlsoKnownAs": [],
+    "personMovedTo": null,
+    "personMemorial": false,
+    "personSuspended": false
+  },
+  "personFollowersCount": null,
+  "personFollowingCount": 12
+}

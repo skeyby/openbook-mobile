@@ -1,0 +1,28 @@
+{
+  "postId": "01900000-0000-7000-8000-000000000002",
+  "postUri": "https://example.org/posts/01900000-0000-7000-8000-000000000002",
+  "postAuthor": {
+    "personId": "01900000-0000-7000-8000-000000000001",
+    "personUsername": "alex",
+    "personDomain": "example.org",
+    "personName": "Alex Example",
+    "personAvatar": "https://example.org/images/alex.png"
+  },
+  "postContent": "Hello from my application! #OpenBook",
+  "postCW": false,
+  "postVisibility": "public",
+  "postPublishedAt": "2026-10-25T12:00:00Z",
+  "postAttributes": {
+    "postLocation": null
+  },
+  "postCounters": {
+    "postLikesCount": 0,
+    "postCommentsCount": 0,
+    "postAnnouncesCount": 0
+  },
+  "postMyInteractions": {
+    "postLiked": false,
+    "postAnnounced": false,
+    "postDirectAnnounced": false
+  }
+}
