@@ -13,7 +13,7 @@ swift test
 
 The API checker needs the upstream OpenAPI document. Its default location is `../openbook/docs/api/openapi.json`; pass `--spec /path/to/openapi.json` when using another layout. Review contract changes and update implementation/tests before recording a new baseline.
 
-SwiftPM tests use bundled examples and simulated HTTP transport. They cover OAuth primitives and callback validation, controlled terminal-token errors and refresh coordination (concurrent callers, terminal versus temporary failures, storage invalidation and stale-session results), model decoding, request serialization, origin/cursor validation, feed state, reactions, post management, follow relationships and requests, Markdown/custom emoji parsing, image geometry, and timestamp presentation. They must not use real accounts or mutate a live instance.
+SwiftPM tests use bundled examples and simulated HTTP transport. They cover OAuth primitives and callback validation, controlled terminal-token errors and refresh coordination (concurrent callers, terminal versus temporary failures, storage invalidation and stale-session results), model decoding, request serialization, origin/cursor validation, feed state, reactions, post and comment management, comment pagination/replies/ownership, uncertain publication and email-verification errors, follow relationships and requests, Markdown/custom emoji parsing, image geometry, and timestamp presentation. They must not use real accounts or mutate a live instance.
 
 These tests do not exercise the full `AppStore` session lifecycle, the actual browser authentication session, OS Keychain behavior, UI gestures or VoiceOver.
 
@@ -39,7 +39,9 @@ Use a dedicated test account and record the platform/OS, relevant API revision a
 - Switch Timeline/World, paginate, refresh and retry failures. Verify that switching sources resets pagination and returning from a detail preserves the original feed.
 - Open authors, profiles, followers/following and your own posts. Check scrolling, remote-list caveats, profile margins, long names and large Dynamic Type.
 - Exercise likes, boosts, follow states and incoming requests. Verify shared state across screens, disabled concurrent actions, authoritative counts and read-only recovery after a confirmed write.
-- Create/edit/delete dedicated test posts; check visibility, confirmation, draft retention and uncertain-outcome handling.
+- Create/edit/delete dedicated test posts and comments, including nested replies and a deleted/missing parent; check visibility, confirmation, draft retention and uncertain-outcome handling.
+- Check an instance without comment endpoints: unavailable message, no creation/reply actions, distinct handling of an inaccessible post, and recovery after server upgrade.
+- Check unverified-email creation errors for posts/comments, preserved drafts and retry after email confirmation.
 - Verify Markdown links and literal code, custom emoji loading/fallback/wrapping, and relative-date transitions including the 24-hour boundary.
 - Confirm content-warning protection before text/media downloads. Open attachments and avatars; check zoom, pan bounds, double tap, swipe/X, rotation and error retry.
 - Check light/dark appearance, VoiceOver metadata/actions, Reduce Motion, keyboard navigation and macOS Back/Escape behavior.

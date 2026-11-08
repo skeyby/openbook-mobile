@@ -2,6 +2,12 @@ import Foundation
 
 /// Display policy only: the original API timestamp remains unchanged for pagination.
 public enum PostTimestamp {
+    public static func date(from timestamp: String) -> Date? {
+        let parser = ISO8601DateFormatter()
+        parser.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return parser.date(from: timestamp) ?? ISO8601DateFormatter().date(from: timestamp)
+    }
+
     public static func text(for date: Date, now: Date, locale: Locale = Locale(identifier: "it_IT"), timeZone: TimeZone = .current) -> String {
         let elapsed = now.timeIntervalSince(date)
         guard elapsed >= 0, elapsed < 86_400 else {

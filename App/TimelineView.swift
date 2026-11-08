@@ -209,36 +209,7 @@ struct PostRow: View {
                 CustomEmojiText(title, emojis: post.postCustomEmojis, textStyle: .title3, weight: .bold)
             }
             if !post.postContent.isEmpty { MarkdownPostView(post.postContent, baseURL: post.postUri, emojis: post.postCustomEmojis) }
-            ForEach(post.postAttachments ?? []) { media in
-                if media.mediaMimeType.hasPrefix("image/"),
-                   let imageURL = safeImageURL(media.mediaUrl) ?? safeImageURL(media.mediaPreviewUrl) {
-                    Button {
-                        activeImage = PostImageSelection(id: media.id, url: imageURL,
-                                                         description: media.mediaAltText ?? "Immagine allegata")
-                    } label: {
-                        if let preview = safeImageURL(media.mediaPreviewUrl) {
-                            AsyncImage(url: preview) { phase in
-                                switch phase {
-                                case .success(let image): image.resizable().scaledToFit()
-                                case .failure: Label("Apri immagine", systemImage: "photo")
-                                default: ProgressView().frame(height: 100)
-                                }
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: 360)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                        } else {
-                            Label("Apri immagine", systemImage: "photo")
-                        }
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel("Apri immagine: \(media.mediaAltText ?? "Immagine allegata")")
-                    .accessibilityHint("Apre l’immagine a tutto schermo")
-                } else if let url = safeImageURL(media.mediaUrl) {
-                    Link(destination: url) {
-                        Label(media.mediaAltText ?? "Apri allegato", systemImage: media.mediaMimeType.hasPrefix("video/") ? "video" : "paperclip")
-                    }
-                }
-            }
+            PostAttachmentsView(attachments: post.postAttachments ?? [], selection: $activeImage)
             if let source = post.postSourceUri, let url = safeImageURL(URL(string: source)) {
                 Link("Apri la fonte", destination: url).font(.subheadline)
             }
@@ -263,15 +234,15 @@ struct PostRow: View {
                 .accessibilityValue(store.likes.state(for: post).count.map { "\($0) Mi piace" } ?? "Contatore da aggiornare")
                 if opensDetails {
                     Button { navigation.path.append(.post(post.id)) } label: {
-                        Label("\(post.postCounters.postCommentsCount)", systemImage: "bubble")
+                        Label(store.comments.count(for: post).map(String.init) ?? "—", systemImage: "bubble")
                             .frame(minHeight: 44).contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Apri dettaglio del post")
-                    .accessibilityValue("\(post.postCounters.postCommentsCount) commenti")
+                    .accessibilityValue(store.comments.count(for: post).map { "\($0) commenti" } ?? "Contatore commenti da aggiornare")
                 } else {
-                    Label("\(post.postCounters.postCommentsCount)", systemImage: "bubble")
-                        .accessibilityLabel("\(post.postCounters.postCommentsCount) commenti")
+                    Label(store.comments.count(for: post).map(String.init) ?? "—", systemImage: "bubble")
+                        .accessibilityLabel(store.comments.count(for: post).map { "\($0) commenti" } ?? "Contatore commenti da aggiornare")
                 }
                 Button {
                     Task { await store.announces.toggle(post: post) { try await store.authorizedCredentials() } }
@@ -289,6 +260,14 @@ struct PostRow: View {
                 .accessibilityValue(store.announces.state(for: post).count.map { "\($0) condivisioni" } ?? "Contatore da aggiornare")
             }
             .font(.caption).foregroundStyle(.secondary)
+            if store.comments.unknownCounts.contains(post.id.lowercased()) {
+                VStack(alignment: .leading, spacing: 6) {
+                    if let message = store.comments.countErrors[post.id.lowercased()] { Text(message).font(.footnote) }
+                    Button("Aggiorna contatore commenti") {
+                        Task { await store.comments.refreshCount(postID: post.id) { try await store.authorizedCredentials() } }
+                    }.disabled(store.comments.countPending.contains(post.id.lowercased()))
+                }
+            }
             if let message = store.announces.errors[post.id] {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(message).font(.footnote).foregroundStyle(.red)
@@ -313,7 +292,7 @@ struct PostRow: View {
     }
 }
 
-private struct PostDateText: View {
+struct PostDateText: View {
     let date: Date
 
     var body: some View {

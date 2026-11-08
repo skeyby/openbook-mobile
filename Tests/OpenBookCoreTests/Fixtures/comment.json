@@ -1,0 +1,22 @@
+{
+  "commentId": "01900000-0000-7000-8000-000000000004",
+  "commentUri": "https://example.org/comments/01900000-0000-7000-8000-000000000004",
+  "commentPostId": "01900000-0000-7000-8000-000000000002",
+  "commentParentId": null,
+  "commentAuthor": {
+    "personId": "01900000-0000-7000-8000-000000000001",
+    "personUsername": "alex",
+    "personDomain": "example.org",
+    "personName": "Alex Example",
+    "personAvatar": "https://example.org/images/alex.png"
+  },
+  "commentContent": "Thank you for sharing this walk.",
+  "commentPublishedAt": "2026-11-08T10:00:00Z",
+  "commentCounters": {
+    "commentLikesCount": 0,
+    "commentRepliesCount": 0
+  },
+  "commentMyInteractions": {
+    "commentLiked": false
+  }
+}

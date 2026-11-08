@@ -68,9 +68,7 @@ public struct Post: Decodable, Identifiable, Sendable {
     }
 
     public var publishedDate: Date? {
-        let parser = ISO8601DateFormatter()
-        parser.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return parser.date(from: postPublishedAt) ?? ISO8601DateFormatter().date(from: postPublishedAt)
+        PostTimestamp.date(from: postPublishedAt)
     }
 }
 

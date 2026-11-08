@@ -10,6 +10,7 @@ The project is in early development and follows an evolving, experimental REST A
 - Profiles, personal posts, shared posts, followers and following; profile lookup by instance UUID.
 - Follow/unfollow, pending follow state, and approval or rejection of incoming follow requests.
 - Post details, likes and manual boosts, with shared state across screens.
+- Paginated comments and nested replies, with Markdown, custom emoji and existing attachments; edit or delete your own comments.
 - Text post creation with public, unlisted or followers-only visibility; basic editing and deletion of your own posts.
 - Native Markdown rendering, clickable links, content warnings and custom emoji in posts and profiles.
 - Full-screen images and profile photos, with zoom and dismissal gestures on iOS; a modal viewer on macOS.
@@ -38,16 +39,19 @@ Instances should use HTTPS with a trusted certificate. HTTP is accepted only for
 
 Disconnecting removes the local session. It does not revoke the token remotely. A definitive token-refresh rejection clears the saved session and asks you to sign in again; temporary failures remain retryable. The current screen and draft stay in memory until you explicitly disconnect.
 
+Comments appear under the post in its detail screen and load more as you scroll. On instances without the comment endpoints, the app shows a non-blocking availability message and hides comment creation/replies; a manual retry can detect support after a server upgrade. Use **Scrivi un commento** or **Rispondi**; the comment inherits the post’s visibility. The menu on your own comments offers editing and deletion. Deleting a parent preserves its published replies, and unavailable parents are not hidden or treated as empty conversations. Post and comment creation require a verified account email; if verification is needed, the app preserves the draft and explains how to proceed on the instance website. The existing login remains usable after verification.
+
 ## Current limitations
 
 This is an early client, not a complete implementation of every OpenBook feature:
 
-- Comments are a placeholder; profile-name search and profile editing are not implemented.
-- The composer supports text and visibility, without media uploads, replies, polls or quotes. Editing has the same basic scope; unsupported post types may be rejected by the server.
+- Profile-name search and profile editing are not implemented.
+- Comment likes are displayed as server-provided state/counts; the API does not yet expose comment-like actions. Comments and sibling replies are shown oldest first. Replies are grouped under their parent with indentation and a thread line; visual indentation is capped on deep threads to keep text readable.
+- The composer supports text and visibility, without media uploads, polls or quotes. Editing has the same basic scope; unsupported post types may be rejected by the server.
 - Remote profiles and relationship lists contain what the authenticated instance knows and may be incomplete.
 - Biographies remain plain text rather than rendered Markdown/HTML. Custom emoji are static; unknown or unavailable emoji retain their shortcode. Author references in lists do not include an emoji map.
 - Markdown images appear as linked alternative text. Code and link labels retain literal emoji shortcodes. Tables have no dedicated table layout.
-- Drafts remain in memory and are not restored after the app exits. An uncertain publication requires checking the timeline before explicitly retrying.
+- Drafts remain in memory and are not restored after the app exits. An uncertain publication requires checking the timeline or comments before explicitly retrying.
 
 See [API coverage](docs/API_COVERAGE.md) for supported operations and [architecture](docs/ARCHITECTURE.md) for behavioral details. These detailed documents are currently in Italian.
 

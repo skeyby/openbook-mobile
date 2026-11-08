@@ -68,10 +68,12 @@ struct PostListView<Header: View>: View {
         let reactionRevision = store.likes.revision
         let announceRevision = store.announces.revision
         let managementRevision = store.management.revision
+        let commentRevision = store.comments.revision
         if let page = await feed.load(reset: reset, credentials: { try await store.authorizedCredentials() }) {
             store.likes.ingest(page.posts, ifRevision: reactionRevision)
             store.announces.ingest(page.posts, ifRevision: announceRevision)
             store.management.ingest(page.posts, ifRevision: managementRevision)
+            store.comments.ingestPosts(page.posts, ifRevision: commentRevision)
         }
     }
 }

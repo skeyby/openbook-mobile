@@ -13,6 +13,7 @@ final class AppStore: ObservableObject {
     let likes = PostLikes()
     let announces = PostAnnounces()
     let management = PostManagement()
+    let comments = CommentManagement()
     let follows = PersonFollows()
     let incomingFollowRequests = IncomingFollowRequests()
     @Published private(set) var currentPersonID: String?
@@ -59,6 +60,7 @@ final class AppStore: ObservableObject {
             likes.reset()
             announces.reset()
             management.reset()
+            comments.reset()
             follows.reset()
             incomingFollowRequests.reset()
             sessionGeneration += 1
@@ -81,6 +83,7 @@ final class AppStore: ObservableObject {
             likes.reset()
             announces.reset()
             management.reset()
+            comments.reset()
             follows.reset()
             incomingFollowRequests.reset()
             sessionGeneration += 1

@@ -45,6 +45,15 @@ if args.record:
     instance_examples = spec['paths']['/instance']['get']['responses']['200']['content']['application/json']['examples']
     for name, example in instance_examples.items():
         (ROOT / f'Tests/OpenBookCoreTests/Fixtures/instance-{name}.json').write_text(json.dumps(example['value'], indent=2) + '\n')
+    comment = spec['components']['schemas']['Comment']['example']
+    (ROOT / 'Tests/OpenBookCoreTests/Fixtures/comment.json').write_text(json.dumps(comment, indent=2) + '\n')
+    comments = spec['paths']['/posts/{postId}/comments']['get']['responses']['200']['content']['application/json']['example']
+    (ROOT / 'Tests/OpenBookCoreTests/Fixtures/comments.json').write_text(json.dumps(comments, indent=2) + '\n')
+    for schema, filename in [('NewComment', 'new-comment'), ('PatchComment', 'patch-comment')]:
+        example = spec['components']['schemas'][schema]['example']
+        (ROOT / f'Tests/OpenBookCoreTests/Fixtures/{filename}.json').write_text(json.dumps(example, indent=2) + '\n')
+    email_error = spec['paths']['/posts']['post']['responses']['403']['content']['application/problem+json']['example']
+    (ROOT / 'Tests/OpenBookCoreTests/Fixtures/email-verification-required.json').write_text(json.dumps(email_error, indent=2) + '\n')
     print('Baseline ed esempi ufficiali aggiornati. Eseguire i test e rivedere il diff.')
 elif not baseline.exists() or json.loads(baseline.read_text()) != record:
     sys.exit('La specifica è cambiata: rileggerla e adattare codice/test prima di usare --record.')

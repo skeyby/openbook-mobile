@@ -106,6 +106,109 @@ public struct APIClient: Sendable {
         }
     }
 
+    public func comments(postID: String, nextPage: URL? = nil, credentials: Credentials) async throws -> CommentsPage {
+        var request = try commentRequest(postID: postID, credentials: credentials)
+        if let nextPage {
+            try validateCommentPage(nextPage, postID: postID, instance: credentials.instance)
+            request.url = nextPage
+        } else {
+            var parts = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)!
+            parts.queryItems = [.init(name: "limit", value: "20"), .init(name: "sort", value: "commentPublishedAt"), .init(name: "direction", value: "asc")]
+            request.url = parts.url
+        }
+        let (comments, response): ([Comment], HTTPURLResponse) = try await decode(request)
+        guard comments.allSatisfy({ $0.commentPostId.lowercased() == postID.lowercased() }) else {
+            throw OpenBookError.message("La risposta contiene commenti di un altro post.")
+        }
+        var next: URL?
+        if !comments.isEmpty, let header = response.value(forHTTPHeaderField: "Link") {
+            let expression = try NSRegularExpression(pattern: #"<([^>]+)>([^<]*)"#)
+            let ns = header as NSString
+            for match in expression.matches(in: header, range: NSRange(location: 0, length: ns.length)) {
+                let parameters = ns.substring(with: match.range(at: 2))
+                guard parameters.range(of: #"rel\s*=\s*(?:"next"|next)(?:\s|;|,|$)"#, options: .regularExpression) != nil else { continue }
+                guard let url = URL(string: ns.substring(with: match.range(at: 1)), relativeTo: request.url)?.absoluteURL else {
+                    throw OpenBookError.message("Il link della pagina successiva non è valido.")
+                }
+                try validateCommentPage(url, postID: postID, instance: credentials.instance)
+                next = url; break
+            }
+        }
+        return CommentsPage(comments: comments, nextPage: next)
+    }
+
+    private func validateCommentPage(_ url: URL, postID: String, instance: Instance) throws {
+        let origin = instance.origin
+        let port = origin.scheme == "https" ? 443 : 80
+        let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
+        let query = Dictionary(items.map { ($0.name, $0.value ?? "") }, uniquingKeysWith: { first, _ in first })
+        guard url.scheme == origin.scheme, url.host == origin.host,
+              (url.port ?? port) == (origin.port ?? port), url.user == nil, url.password == nil, url.fragment == nil,
+              url.path == "/rest/v1/posts/\(postID.lowercased())/comments",
+              Set(items.map(\.name)).count == items.count,
+              Set(query.keys).isSubset(of: ["after", "limit", "sort", "direction"]),
+              query["after"].flatMap(UUID.init(uuidString:)) != nil,
+              (query["sort"] ?? "commentPublishedAt") == "commentPublishedAt", (query["direction"] ?? "asc") == "asc",
+              query["limit"].map({ Int($0).map { (1...100).contains($0) } ?? false }) ?? true else {
+            throw OpenBookError.message("La pagina successiva non appartiene ai commenti di questo post. Ricarica dall’inizio.")
+        }
+    }
+
+    public func comment(postID: String, id: String, credentials: Credentials) async throws -> Comment {
+        let comment: Comment = try await decode(commentRequest(postID: postID, id: id, credentials: credentials)).0
+        try validateComment(comment, postID: postID, id: id)
+        return comment
+    }
+
+    public func createComment(postID: String, draft: NewComment, credentials: Credentials) async throws -> CommentCreation {
+        var request = try commentRequest(postID: postID, credentials: credentials)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(draft)
+        do {
+            let (data, response) = try await response(request)
+            guard response.statusCode == 201 else { throw CommentCreationError.uncertain("Risposta inattesa dal server.") }
+            let comment = try? JSONDecoder().decode(Comment.self, from: data)
+            return CommentCreation(comment: comment.flatMap { $0.commentPostId.lowercased() == postID.lowercased() ? $0 : nil })
+        } catch let error as OpenBookError {
+            if case .http(let status, _) = error, (400..<500).contains(status) { throw error }
+            throw CommentCreationError.uncertain(error.localizedDescription)
+        } catch let error as CommentCreationError { throw error }
+        catch { throw CommentCreationError.uncertain(error.localizedDescription) }
+    }
+
+    public func editComment(postID: String, id: String, patch: PatchComment, credentials: Credentials) async throws -> Comment {
+        var request = try commentRequest(postID: postID, id: id, credentials: credentials)
+        request.httpMethod = "PATCH"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(patch)
+        let (data, response) = try await response(request)
+        guard response.statusCode == 200 else { throw OpenBookError.message("Salvataggio non confermato. Rileggi il commento prima di riprovare.") }
+        let comment = try JSONDecoder().decode(Comment.self, from: data)
+        try validateComment(comment, postID: postID, id: id)
+        return comment
+    }
+
+    public func deleteComment(postID: String, id: String, credentials: Credentials) async throws {
+        var request = try commentRequest(postID: postID, id: id, credentials: credentials)
+        request.httpMethod = "DELETE"
+        let (_, response) = try await response(request)
+        guard response.statusCode == 204 else { throw OpenBookError.message("Cancellazione non confermata. Ricarica i commenti prima di riprovare.") }
+    }
+
+    private func commentRequest(postID: String, id: String? = nil, credentials: Credentials) throws -> URLRequest {
+        guard UUID(uuidString: postID) != nil, id == nil || UUID(uuidString: id!) != nil else {
+            throw OpenBookError.message("Identificativo del post o del commento non valido.")
+        }
+        return authorizedRequest(path: "/rest/v1/posts/\(postID.lowercased())/comments" + (id.map { "/\($0.lowercased())" } ?? ""), credentials: credentials)
+    }
+
+    private func validateComment(_ comment: Comment, postID: String, id: String) throws {
+        guard comment.commentPostId.lowercased() == postID.lowercased(), comment.id.lowercased() == id.lowercased() else {
+            throw OpenBookError.message("Il commento ricevuto non corrisponde a quello richiesto.")
+        }
+    }
+
     public func createPost(_ draft: NewPost, credentials: Credentials) async throws -> PostCreation {
         var request = authorizedRequest(path: "/rest/v1/posts", credentials: credentials)
         request.httpMethod = "POST"
@@ -260,6 +363,9 @@ public struct APIClient: Sendable {
         guard let response = rawResponse as? HTTPURLResponse else { throw OpenBookError.message("Risposta del server non valida.") }
         guard (200..<300).contains(response.statusCode) else {
             let problem = try? JSONDecoder().decode(Problem.self, from: data)
+            if response.statusCode == 403, problem?.code == "emailVerificationRequired" {
+                throw OpenBookError.http(403, "Verifica il tuo indirizzo email sul sito dell’istanza prima di pubblicare post o commenti. Dopo la verifica puoi riprovare senza accedere nuovamente.")
+            }
             if tokenExchange, [400, 401].contains(response.statusCode) {
                 switch problem?.error {
                 case "invalid_grant": throw OAuthTokenError.invalidGrant
@@ -289,6 +395,7 @@ public struct APIClient: Sendable {
 }
 
 private struct Problem: Decodable {
+    let code: String?
     let title: String?
     let detail: String?
     let error: String?
