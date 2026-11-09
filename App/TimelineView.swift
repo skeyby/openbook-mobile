@@ -14,7 +14,7 @@ struct TimelineView: View {
 
     var body: some View {
         NavigationStack(path: $navigation.path) {
-            PostListView(source: .feed(engine), api: store.api, title: engine.title, refreshHeader: {
+            PostListView(source: .feed(engine), api: store.api, title: nil, refreshHeader: {
                 await store.loadInstanceMetadata()
                 return true
             }) {
@@ -28,6 +28,7 @@ struct TimelineView: View {
                         }
                     }
                 }
+                PostPublicationsView { feedRevision = UUID() }
             }
                 .id("\(engine.rawValue)-\(feedRevision.uuidString)")
                 .navigationTitle(store.instanceMetadata?.displayName ?? instanceHost)
@@ -91,9 +92,16 @@ struct TimelineView: View {
         .task { await store.loadInstanceMetadata() }
         .sheet(isPresented: $isComposing) {
             NewPostView(composer: composer) { result in
-                publicationMessage = result.post == nil
-                    ? "Post pubblicato. La risposta non è leggibile: controlla la timeline."
-                    : "Post pubblicato."
+                store.publications.register(result)
+                if result.wasDeferred {
+                    publicationMessage = result.monitorID == nil
+                        ? "Invio ricevuto, ma lo stato non è leggibile. Controlla la timeline prima di creare un altro post."
+                        : "File ricevuti. Il post verrà pubblicato dopo l’elaborazione del video."
+                } else {
+                    publicationMessage = result.post == nil
+                        ? "Post pubblicato. La risposta non è leggibile: controlla la timeline."
+                        : "Post pubblicato."
+                }
                 composer.reset()
                 returnToTimeline()
             } checkTimeline: { returnToTimeline() } close: { isComposing = false }
@@ -173,16 +181,33 @@ struct PostRow: View {
                 }
             }
 
-            if post.postCW {
-                VStack(alignment: .leading, spacing: 8) {
-                    Label(post.postCWText.flatMap { $0.isEmpty ? nil : $0 } ?? "Avviso sul contenuto", systemImage: "eye.slash")
-                        .font(.subheadline.bold())
-                    Button(revealed ? "Nascondi contenuto" : "Mostra contenuto") { revealed.toggle() }
-                        .buttonStyle(.bordered)
-                    if !revealed && opensDetails {
-                        Button("Apri dettaglio", systemImage: "bubble") { navigation.path.append(.post(post.id)) }
+            if post.postCW && !revealed {
+                Button { revealed = true } label: {
+                    HStack(alignment: .top, spacing: 12) {
+                        Image(systemName: "eye.slash").font(.title2)
+                            .accessibilityHidden(true)
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(post.postCWText.flatMap { $0.isEmpty ? nil : $0 } ?? "Avviso sul contenuto")
+                                .font(.subheadline.bold())
+                            Text("Clicca per visualizzare comunque")
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
+                        .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
                     }
+                    .foregroundStyle(.primary)
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.gray.opacity(0.18), in: RoundedRectangle(cornerRadius: 12))
+                    .contentShape(RoundedRectangle(cornerRadius: 12))
                 }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Avviso sul contenuto: \(post.postCWText.flatMap { $0.isEmpty ? nil : $0 } ?? "Contenuto nascosto")")
+                .accessibilityHint("Mostra il testo e gli allegati del post")
+            } else if post.postCW {
+                Button("Nascondi contenuto", systemImage: "eye.slash") { revealed = false }
+                    .font(.caption).buttonStyle(.borderless)
+                    .frame(minHeight: 44)
             }
             if !post.postCW || revealed { postBody }
             if let error = store.management.errors[post.id] { Text(error).font(.footnote).foregroundStyle(.red) }

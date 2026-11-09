@@ -11,7 +11,8 @@ The project is in early development and follows an evolving, experimental REST A
 - Follow/unfollow, pending follow state, and approval or rejection of incoming follow requests.
 - Post details, likes and manual boosts, with shared state across screens.
 - Paginated comments and nested replies, with Markdown, custom emoji and existing attachments; edit or delete your own comments.
-- Text post creation with public, unlisted or followers-only visibility; basic editing and deletion of your own posts.
+- Post creation with public, unlisted or followers-only visibility; photo/video attachments from the iOS photo picker, alternative descriptions and attachment ordering.
+- Deferred video-publication status, foreground monitoring and cancellation when the server allows it; basic editing and deletion of your own posts.
 - Native Markdown rendering, clickable links, content warnings and custom emoji in posts and profiles.
 - Full-screen images and profile photos, with zoom and dismissal gestures on iOS; a modal viewer on macOS.
 - Relative post timestamps for the first 24 hours, then local date and time.
@@ -41,17 +42,23 @@ Disconnecting removes the local session. It does not revoke the token remotely. 
 
 Comments appear under the post in its detail screen and load more as you scroll. On instances without the comment endpoints, the app shows a non-blocking availability message and hides comment creation/replies; a manual retry can detect support after a server upgrade. Use **Scrivi un commento** or **Rispondi**; the comment inherits the post’s visibility. The menu on your own comments offers editing and deletion. Deleting a parent preserves its published replies, and unavailable parents are not hidden or treated as empty conversations. Post and comment creation require a verified account email; if verification is needed, the app preserves the draft and explains how to proceed on the instance website. The existing login remains usable after verification.
 
+On iOS, **Nuovo post → Aggiungi foto o video** opens the system photo picker. Preview selected media, reorder or remove it, and optionally add an alternative description (up to 1,000 characters). An attachment-only post can have empty text; whitespace-only text is rejected. The app reads the instance’s attachment limits, restricts selection to supported media types, and checks file count, individual sizes and the complete multipart request size before uploading. Text and alternative descriptions count toward the total; known request limits also apply to text-only posts. Limits are refreshed before sending; the server remains authoritative for formats, duration and any lower infrastructure limits.
+
+Photos publish immediately when accepted. A submission containing video is accepted for processing as a whole, including its text and other attachments. The home screen shows **Invii multimediali** until processing completes; no numerical progress or deadline is available. You can refresh the status, open the resulting post, or cancel a pending/failed submission after confirmation. Processing submissions cannot be cancelled. A status-check error never resends the post. Instances that omit upload limits are treated as supporting zero attachments: media selection is unavailable, while text-only posts remain available. Failed limit refreshes block media submission and preserve the draft.
+
+Videos in posts and comments play inline automatically without sound while visible, with native playback controls, an audio toggle and fullscreen playback. They stop outside the viewport or when leaving the screen; loading failures offer an explicit retry. Content warnings also protect video loading.
+
 ## Current limitations
 
 This is an early client, not a complete implementation of every OpenBook feature:
 
 - Profile-name search and profile editing are not implemented.
 - Comment likes are displayed as server-provided state/counts; the API does not yet expose comment-like actions. Comments and sibling replies are shown oldest first. Replies are grouped under their parent with indentation and a thread line; visual indentation is capped on deep threads to keep text readable.
-- The composer supports text and visibility, without media uploads, polls or quotes. Editing has the same basic scope; unsupported post types may be rejected by the server.
+- Media selection is currently available on iOS; macOS keeps the text composer. There are no audio-file selection, attachment uploads for comments, polls or quotes. Basic post editing does not change attachments; unsupported post types may be rejected by the server.
 - Remote profiles and relationship lists contain what the authenticated instance knows and may be incomplete.
 - Biographies remain plain text rather than rendered Markdown/HTML. Custom emoji are static; unknown or unavailable emoji retain their shortcode. Author references in lists do not include an emoji map.
 - Markdown images appear as linked alternative text. Code and link labels retain literal emoji shortcodes. Tables have no dedicated table layout.
-- Drafts remain in memory and are not restored after the app exits. An uncertain publication requires checking the timeline or comments before explicitly retrying.
+- Draft text and video-monitoring records remain in memory and are not restored after the app exits. Selected media and multipart bodies use private temporary files, released when no longer needed; the server can continue processing an accepted video after the app closes. An uncertain publication requires checking the timeline or comments before explicitly retrying.
 
 See [API coverage](docs/API_COVERAGE.md) for supported operations and [architecture](docs/ARCHITECTURE.md) for behavioral details. These detailed documents are currently in Italian.
 

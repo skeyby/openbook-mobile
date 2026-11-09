@@ -14,14 +14,17 @@ final class AppStore: ObservableObject {
     let announces = PostAnnounces()
     let management = PostManagement()
     let comments = CommentManagement()
+    let publications = PostPublications()
     let follows = PersonFollows()
     let incomingFollowRequests = IncomingFollowRequests()
     @Published private(set) var currentPersonID: String?
     @Published private(set) var identityError: String?
     @Published private(set) var instanceMetadata: InstanceMetadata?
     @Published private(set) var instanceMetadataError: String?
+    private var instanceMetadataRevision = 0
     private var isLoadingInstance = false
     private var sessionGeneration = 0
+    var sessionRevision: Int { sessionGeneration }
     private let keychain = KeychainStore()
     private let browser = BrowserAuthentication()
     private let renewal = CredentialRenewal()
@@ -61,6 +64,7 @@ final class AppStore: ObservableObject {
             announces.reset()
             management.reset()
             comments.reset()
+            publications.reset()
             follows.reset()
             incomingFollowRequests.reset()
             sessionGeneration += 1
@@ -84,6 +88,7 @@ final class AppStore: ObservableObject {
             announces.reset()
             management.reset()
             comments.reset()
+            publications.reset()
             follows.reset()
             incomingFollowRequests.reset()
             sessionGeneration += 1
@@ -101,17 +106,37 @@ final class AppStore: ObservableObject {
         isLoadingInstance = true
         let generation = sessionGeneration
         defer { if generation == sessionGeneration { isLoadingInstance = false } }
+        do { _ = try await fetchInstanceMetadata() }
+        catch { /* The shared reader records current-session errors. */ }
+    }
+
+    func refreshUploadLimits() async throws -> InstanceUploadLimits? {
+        do { return try await fetchInstanceMetadata().instanceUploadLimits }
+        catch is CancellationError { throw CancellationError() }
+        catch {
+            throw OpenBookError.message("Impossibile aggiornare i limiti degli allegati. Nessun file è stato inviato. \(error.localizedDescription)")
+        }
+    }
+
+    /// A slower branding read must not replace a newer upload-policy response.
+    private func fetchInstanceMetadata() async throws -> InstanceMetadata {
+        let session = sessionGeneration
+        instanceMetadataRevision += 1
+        let revision = instanceMetadataRevision
         do {
-            let credentials = try await authorizedCredentials()
-            let metadata = try await api.instanceMetadata(credentials: credentials)
+            let auth = try await authorizedCredentials()
             try Task.checkCancellation()
-            guard generation == sessionGeneration else { return }
+            guard session == sessionGeneration, revision == instanceMetadataRevision else { throw CancellationError() }
+            let metadata = try await api.instanceMetadata(credentials: auth)
+            try Task.checkCancellation()
+            guard session == sessionGeneration, revision == instanceMetadataRevision else { throw CancellationError() }
             instanceMetadata = metadata
             instanceMetadataError = nil
+            return metadata
         } catch {
-            guard generation == sessionGeneration, !Task.isCancelled else { return }
-            instanceMetadata = nil
-            instanceMetadataError = error.localizedDescription
+            if session == sessionGeneration, revision == instanceMetadataRevision, !Task.isCancelled,
+               !(error is CancellationError) { instanceMetadataError = error.localizedDescription }
+            throw error
         }
     }
 

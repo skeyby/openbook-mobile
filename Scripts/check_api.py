@@ -54,6 +54,9 @@ if args.record:
         (ROOT / f'Tests/OpenBookCoreTests/Fixtures/{filename}.json').write_text(json.dumps(example, indent=2) + '\n')
     email_error = spec['paths']['/posts']['post']['responses']['403']['content']['application/problem+json']['example']
     (ROOT / 'Tests/OpenBookCoreTests/Fixtures/email-verification-required.json').write_text(json.dumps(email_error, indent=2) + '\n')
+    for schema, filename in [('PostPublication', 'post-publication'), ('NewPostAttachment', 'new-post-attachment')]:
+        example = spec['components']['schemas'][schema]['example']
+        (ROOT / f'Tests/OpenBookCoreTests/Fixtures/{filename}.json').write_text(json.dumps(example, indent=2) + '\n')
     print('Baseline ed esempi ufficiali aggiornati. Eseguire i test e rivedere il diff.')
 elif not baseline.exists() or json.loads(baseline.read_text()) != record:
     sys.exit('La specifica è cambiata: rileggerla e adattare codice/test prima di usare --record.')

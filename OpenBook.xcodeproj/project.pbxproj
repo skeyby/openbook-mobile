@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CCAB126E76AC4AA9A0FA6052 /* App/PostAttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6051 /* App/PostAttachmentsView.swift */; };
-		CCAB126E76AC4AA9A0FA6042 /* App/CommentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6041 /* App/CommentViews.swift */; };
-		CCAB126E76AC4AA9A0FA6032 /* Sources/OpenBookCore/CommentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6031 /* Sources/OpenBookCore/CommentEditor.swift */; };
-		CCAB126E76AC4AA9A0FA6022 /* Sources/OpenBookCore/CommentManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6021 /* Sources/OpenBookCore/CommentManagement.swift */; };
-		CCAB126E76AC4AA9A0FA6012 /* Sources/OpenBookCore/CommentFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/CommentFeed.swift */; };
-		CCAB126E76AC4AA9A0FA6002 /* Sources/OpenBookCore/Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6001 /* Sources/OpenBookCore/Comments.swift */; };
+		F5AB126E76AC4AA9A0FA6202 /* App/PostVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AB126E76AC4AA9A0FA6201 /* App/PostVideoView.swift */; };
+		CDAB126E76AC4AA9A0FA6032 /* App/PostPublicationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB126E76AC4AA9A0FA6031 /* App/PostPublicationsView.swift */; };
+		CDAB126E76AC4AA9A0FA6022 /* App/PostMediaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB126E76AC4AA9A0FA6021 /* App/PostMediaPickerView.swift */; };
+		CDAB126E76AC4AA9A0FA6012 /* Sources/OpenBookCore/PostPublications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/PostPublications.swift */; };
+		CDAB126E76AC4AA9A0FA6002 /* Sources/OpenBookCore/PostMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB126E76AC4AA9A0FA6001 /* Sources/OpenBookCore/PostMedia.swift */; };
 		0D6C83246CE0B16A4A1AE511 /* Sources/OpenBookCore/PostMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3633A7C5E651936796166A74 /* Sources/OpenBookCore/PostMarkdown.swift */; };
 		144851D86A1671FAB6B6F825 /* App/KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB124EB97FF5B085C8D0E85 /* App/KeychainStore.swift */; };
 		1AED35F51C531CF22CE81124 /* App/BrowserAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BC6912DFB2C4682877C176 /* App/BrowserAuthentication.swift */; };
@@ -40,6 +39,12 @@
 		C378B4C00E76DBE9EED52CF9 /* Sources/OpenBookCore/Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDFB515E234039D0A681E23 /* Sources/OpenBookCore/Posts.swift */; };
 		CAAB126E76AC4AA9A0FA62B2 /* App/CustomEmojiText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB126E76AC4AA9A0FA62B1 /* App/CustomEmojiText.swift */; };
 		CAAB126E76AC4AA9A0FA62B4 /* Sources/OpenBookCore/CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAB126E76AC4AA9A0FA62B3 /* Sources/OpenBookCore/CustomEmoji.swift */; };
+		CCAB126E76AC4AA9A0FA6002 /* Sources/OpenBookCore/Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6001 /* Sources/OpenBookCore/Comments.swift */; };
+		CCAB126E76AC4AA9A0FA6012 /* Sources/OpenBookCore/CommentFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/CommentFeed.swift */; };
+		CCAB126E76AC4AA9A0FA6022 /* Sources/OpenBookCore/CommentManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6021 /* Sources/OpenBookCore/CommentManagement.swift */; };
+		CCAB126E76AC4AA9A0FA6032 /* Sources/OpenBookCore/CommentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6031 /* Sources/OpenBookCore/CommentEditor.swift */; };
+		CCAB126E76AC4AA9A0FA6042 /* App/CommentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6041 /* App/CommentViews.swift */; };
+		CCAB126E76AC4AA9A0FA6052 /* App/PostAttachmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB126E76AC4AA9A0FA6051 /* App/PostAttachmentsView.swift */; };
 		CFB7126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PersonFollows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PersonFollows.swift */; };
 		D0876DE8261DC3D7FDEB2D94 /* App/AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF2C0908FA1A949F0857078 /* App/AppStore.swift */; };
 		DAAB126E76AC4AA9A0FA62B2 /* Sources/OpenBookCore/PostTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PostTimestamp.swift */; };
@@ -62,12 +67,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CCAB126E76AC4AA9A0FA6051 /* App/PostAttachmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostAttachmentsView.swift; sourceTree = SOURCE_ROOT; };
-		CCAB126E76AC4AA9A0FA6041 /* App/CommentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/CommentViews.swift; sourceTree = SOURCE_ROOT; };
-		CCAB126E76AC4AA9A0FA6031 /* Sources/OpenBookCore/CommentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CommentEditor.swift; sourceTree = SOURCE_ROOT; };
-		CCAB126E76AC4AA9A0FA6021 /* Sources/OpenBookCore/CommentManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CommentManagement.swift; sourceTree = SOURCE_ROOT; };
-		CCAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/CommentFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CommentFeed.swift; sourceTree = SOURCE_ROOT; };
-		CCAB126E76AC4AA9A0FA6001 /* Sources/OpenBookCore/Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/Comments.swift; sourceTree = SOURCE_ROOT; };
+		F5AB126E76AC4AA9A0FA6201 /* App/PostVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostVideoView.swift; sourceTree = SOURCE_ROOT; };
+		CDAB126E76AC4AA9A0FA6031 /* App/PostPublicationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostPublicationsView.swift; sourceTree = SOURCE_ROOT; };
+		CDAB126E76AC4AA9A0FA6021 /* App/PostMediaPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostMediaPickerView.swift; sourceTree = SOURCE_ROOT; };
+		CDAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/PostPublications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostPublications.swift; sourceTree = SOURCE_ROOT; };
+		CDAB126E76AC4AA9A0FA6001 /* Sources/OpenBookCore/PostMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostMedia.swift; sourceTree = SOURCE_ROOT; };
 		0112DAE3F84CB4DF5179BE01 /* App/Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App/Info.plist; sourceTree = SOURCE_ROOT; };
 		0CB124EB97FF5B085C8D0E85 /* App/KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/KeychainStore.swift; sourceTree = SOURCE_ROOT; };
 		0FEFF356EB21F848CEEB035A /* Sources/OpenBookCore/PostComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PostComposer.swift; sourceTree = SOURCE_ROOT; };
@@ -95,6 +99,12 @@
 		C23AC32C94FA45B9C1CA0B28 /* App/ProfileExplorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/ProfileExplorer.swift; sourceTree = SOURCE_ROOT; };
 		CAAB126E76AC4AA9A0FA62B1 /* App/CustomEmojiText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/CustomEmojiText.swift; sourceTree = SOURCE_ROOT; };
 		CAAB126E76AC4AA9A0FA62B3 /* Sources/OpenBookCore/CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CustomEmoji.swift; sourceTree = SOURCE_ROOT; };
+		CCAB126E76AC4AA9A0FA6001 /* Sources/OpenBookCore/Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/Comments.swift; sourceTree = SOURCE_ROOT; };
+		CCAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/CommentFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CommentFeed.swift; sourceTree = SOURCE_ROOT; };
+		CCAB126E76AC4AA9A0FA6021 /* Sources/OpenBookCore/CommentManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CommentManagement.swift; sourceTree = SOURCE_ROOT; };
+		CCAB126E76AC4AA9A0FA6031 /* Sources/OpenBookCore/CommentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/CommentEditor.swift; sourceTree = SOURCE_ROOT; };
+		CCAB126E76AC4AA9A0FA6041 /* App/CommentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/CommentViews.swift; sourceTree = SOURCE_ROOT; };
+		CCAB126E76AC4AA9A0FA6051 /* App/PostAttachmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostAttachmentsView.swift; sourceTree = SOURCE_ROOT; };
 		CFB7126E76AC4AA9A0FA62B1 /* Sources/OpenBookCore/PersonFollows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/OpenBookCore/PersonFollows.swift; sourceTree = SOURCE_ROOT; };
 		D069509556BFAFFC25586CC3 /* OpenBookCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OpenBookCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8863E7C24431086285FFFDC /* App/PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/PostListView.swift; sourceTree = SOURCE_ROOT; };
@@ -137,6 +147,9 @@
 				EAAB126E76AC4AA9A0FA62B1 /* App/PostImageViewer.swift */,
 				CCAB126E76AC4AA9A0FA6041 /* App/CommentViews.swift */,
 				CCAB126E76AC4AA9A0FA6051 /* App/PostAttachmentsView.swift */,
+				F5AB126E76AC4AA9A0FA6201 /* App/PostVideoView.swift */,
+				CDAB126E76AC4AA9A0FA6021 /* App/PostMediaPickerView.swift */,
+				CDAB126E76AC4AA9A0FA6031 /* App/PostPublicationsView.swift */,
 				CAAB126E76AC4AA9A0FA62B1 /* App/CustomEmojiText.swift */,
 				DDF4832684381827E6A1BB6C /* App/AppNavigation.swift */,
 				F362A8899E95740A1597C368 /* App/PostDetailView.swift */,
@@ -174,6 +187,8 @@
 				CCAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/CommentFeed.swift */,
 				CCAB126E76AC4AA9A0FA6021 /* Sources/OpenBookCore/CommentManagement.swift */,
 				CCAB126E76AC4AA9A0FA6031 /* Sources/OpenBookCore/CommentEditor.swift */,
+				CDAB126E76AC4AA9A0FA6001 /* Sources/OpenBookCore/PostMedia.swift */,
+				CDAB126E76AC4AA9A0FA6011 /* Sources/OpenBookCore/PostPublications.swift */,
 				CAAB126E76AC4AA9A0FA62B3 /* Sources/OpenBookCore/CustomEmoji.swift */,
 				3633A7C5E651936796166A74 /* Sources/OpenBookCore/PostMarkdown.swift */,
 				5BDFB515E234039D0A681E23 /* Sources/OpenBookCore/Posts.swift */,
@@ -290,6 +305,9 @@
 				EAAB126E76AC4AA9A0FA62B2 /* App/PostImageViewer.swift in Sources */,
 				CCAB126E76AC4AA9A0FA6042 /* App/CommentViews.swift in Sources */,
 				CCAB126E76AC4AA9A0FA6052 /* App/PostAttachmentsView.swift in Sources */,
+				F5AB126E76AC4AA9A0FA6202 /* App/PostVideoView.swift in Sources */,
+				CDAB126E76AC4AA9A0FA6022 /* App/PostMediaPickerView.swift in Sources */,
+				CDAB126E76AC4AA9A0FA6032 /* App/PostPublicationsView.swift in Sources */,
 				CAAB126E76AC4AA9A0FA62B2 /* App/CustomEmojiText.swift in Sources */,
 				3CB106E0D64B6A256CC798FF /* App/AppNavigation.swift in Sources */,
 				ABAA5EF4BAD0E84E879C041A /* App/PostDetailView.swift in Sources */,
@@ -325,6 +343,8 @@
 				CCAB126E76AC4AA9A0FA6012 /* Sources/OpenBookCore/CommentFeed.swift in Sources */,
 				CCAB126E76AC4AA9A0FA6022 /* Sources/OpenBookCore/CommentManagement.swift in Sources */,
 				CCAB126E76AC4AA9A0FA6032 /* Sources/OpenBookCore/CommentEditor.swift in Sources */,
+				CDAB126E76AC4AA9A0FA6002 /* Sources/OpenBookCore/PostMedia.swift in Sources */,
+				CDAB126E76AC4AA9A0FA6012 /* Sources/OpenBookCore/PostPublications.swift in Sources */,
 				CAAB126E76AC4AA9A0FA62B4 /* Sources/OpenBookCore/CustomEmoji.swift in Sources */,
 				0D6C83246CE0B16A4A1AE511 /* Sources/OpenBookCore/PostMarkdown.swift in Sources */,
 				C378B4C00E76DBE9EED52CF9 /* Sources/OpenBookCore/Posts.swift in Sources */,
@@ -389,7 +409,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7N73LAQU36;
@@ -516,7 +536,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = App/OpenBook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7N73LAQU36;
 				ENABLE_APP_SANDBOX = YES;

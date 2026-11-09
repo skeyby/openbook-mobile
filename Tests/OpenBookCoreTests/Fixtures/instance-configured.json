@@ -3,5 +3,11 @@
   "instanceDomain": "social.example",
   "instanceUrl": "https://social.example",
   "instanceDescription": "A friendly OpenBook instance.",
-  "instanceIcon": "https://social.example/storage/instance-icons/00000000-0000-0000-0000-000000000001/icon-512.png"
+  "instanceIcon": "https://social.example/storage/instance-icons/00000000-0000-0000-0000-000000000001/icon-512.png",
+  "instanceUploadLimits": {
+    "maxAttachmentsPerPost": 4,
+    "maxAttachmentBytes": 8388608,
+    "maxVideoAttachmentBytes": null,
+    "maxRequestBytes": 67108864
+  }
 }

@@ -1,12 +1,27 @@
 import Foundation
 
-/// Display metadata only: these URLs never replace the authenticated API origin.
+/// Instance metadata and upload policy. Its URLs never replace the authenticated API origin.
 public struct InstanceMetadata: Decodable, Sendable {
     public let instanceName: String
     public let instanceDomain: String
     public let instanceUrl: URL
     public let instanceDescription: String
     public let instanceIcon: URL?
+    public let instanceUploadLimits: InstanceUploadLimits?
+
+    private enum CodingKeys: String, CodingKey {
+        case instanceName, instanceDomain, instanceUrl, instanceDescription, instanceIcon, instanceUploadLimits
+    }
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        instanceName = try values.decode(String.self, forKey: .instanceName)
+        instanceDomain = try values.decode(String.self, forKey: .instanceDomain)
+        instanceUrl = try values.decode(URL.self, forKey: .instanceUrl)
+        instanceDescription = try values.decode(String.self, forKey: .instanceDescription)
+        instanceIcon = try values.decodeIfPresent(URL.self, forKey: .instanceIcon)
+        // Legacy/incomplete policy means no uploads; branding remains usable.
+        instanceUploadLimits = try? values.decode(InstanceUploadLimits.self, forKey: .instanceUploadLimits)
+    }
 
     public var displayName: String? {
         let name = instanceName.trimmingCharacters(in: .whitespacesAndNewlines)

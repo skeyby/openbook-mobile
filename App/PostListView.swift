@@ -5,12 +5,12 @@ import OpenBookCore
 struct PostListView<Header: View>: View {
     @EnvironmentObject private var store: AppStore
     @State private var feed: PostFeed
-    let title: String
+    let title: String?
     let isRefreshingHeader: Bool
     let refreshHeader: (() async -> Bool)?
     let header: Header
 
-    init(source: PostSource, api: APIClient, title: String, isRefreshingHeader: Bool = false,
+    init(source: PostSource, api: APIClient, title: String?, isRefreshingHeader: Bool = false,
          refreshHeader: (() async -> Bool)? = nil, @ViewBuilder header: () -> Header) {
         _feed = State(initialValue: PostFeed(source: source, api: api))
         self.title = title; self.isRefreshingHeader = isRefreshingHeader
@@ -22,7 +22,9 @@ struct PostListView<Header: View>: View {
             header
             Section {
                 ForEach(visiblePosts) { post in PostRow(post: post) }
-            } header: { Text(title) } footer: {
+            } header: {
+                if let title { Text(title) }
+            } footer: {
                 if case .person = feed.source {
                     Text("Per i profili remoti l’elenco può essere incompleto.")
                 }

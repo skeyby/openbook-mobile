@@ -2,5 +2,11 @@
   "instanceName": "Example Social",
   "instanceDomain": "social.example",
   "instanceUrl": "https://social.example",
-  "instanceDescription": ""
+  "instanceDescription": "",
+  "instanceUploadLimits": {
+    "maxAttachmentsPerPost": 4,
+    "maxAttachmentBytes": 8388608,
+    "maxVideoAttachmentBytes": null,
+    "maxRequestBytes": 67108864
+  }
 }

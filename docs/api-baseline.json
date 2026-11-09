@@ -1,9 +1,10 @@
 {
-  "sha256": "005c09860488c5410a1eb5f3f428db3125abaacc708e163718cf85d96be28e87",
+  "sha256": "0124fc49d6cf6539e87e37f51f1d94324969ad7dddce0484439bd02750500f2f",
   "version": "0.1.0-draft",
   "operations": [
     "DELETE /me/follow-requests/{personId}",
     "DELETE /persons/{personId}/follow",
+    "DELETE /postPublication/{postPublicationId}",
     "DELETE /posts/{postId}",
     "DELETE /posts/{postId}/announce",
     "DELETE /posts/{postId}/comments/{commentId}",
@@ -18,6 +19,7 @@
     "GET /persons/{personId}/followers",
     "GET /persons/{personId}/following",
     "GET /persons/{personId}/posts",
+    "GET /postPublication/{postPublicationId}",
     "GET /posts",
     "GET /posts/{postId}",
     "GET /posts/{postId}/comments",

@@ -209,22 +209,91 @@ public struct APIClient: Sendable {
         }
     }
 
-    public func createPost(_ draft: NewPost, credentials: Credentials) async throws -> PostCreation {
+    public func createPost(_ draft: NewPost, files: [DraftAttachment] = [], limits: InstanceUploadLimits? = nil, credentials: Credentials) async throws -> PostCreation {
         var request = authorizedRequest(path: "/rest/v1/posts", credentials: credentials)
         request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONEncoder().encode(draft)
-        do {
-            let (data, response) = try await response(request)
-            guard response.statusCode == 201 else {
-                throw PostCreationError.uncertain("Risposta inattesa dal server.")
+        let multipart: MultipartPost?
+        if files.isEmpty {
+            guard draft.postAttachments == nil else { throw OpenBookError.message("Gli allegati richiedono i file nello stesso invio.") }
+            multipart = nil
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            let data = try JSONEncoder().encode(draft)
+            try limits?.validate(requestBytes: Int64(data.count))
+            request.httpBody = data
+        } else {
+            guard let limits else { throw OpenBookError.message("Questa istanza non comunica i limiti di caricamento: gli allegati non sono disponibili.") }
+            try limits.validate(files: files)
+            let plannedBytes = try MultipartPost.bodyByteCount(draft: draft, files: files)
+            try limits.validate(requestBytes: plannedBytes)
+            let task = Task.detached(priority: .userInitiated) { try MultipartPost(draft: draft, files: files) }
+            let body = try await withTaskCancellationHandler(operation: { try await task.value }, onCancel: { task.cancel() })
+            multipart = body
+            let actualBytes = try body.url.resourceValues(forKeys: [.fileSizeKey]).fileSize
+            guard let actualBytes else { throw OpenBookError.message("Impossibile verificare la dimensione dell’invio.") }
+            guard Int64(actualBytes) == plannedBytes else {
+                throw OpenBookError.message("Un allegato è cambiato durante la preparazione. Selezionalo nuovamente prima di inviare.")
             }
-            return PostCreation(post: try? JSONDecoder().decode(Post.self, from: data))
+            try limits.validate(requestBytes: Int64(actualBytes))
+            request.setValue(body.contentType, forHTTPHeaderField: "Content-Type")
+            request.timeoutInterval = 120
+        }
+        try Task.checkCancellation()
+        do {
+            // Keep the body owner alive until URLSession has finished reading the file.
+            let (data, response) = try await response(request, uploadFile: multipart?.url)
+            withExtendedLifetime(multipart) { }
+            if response.statusCode == 201 { return PostCreation(post: try? JSONDecoder().decode(Post.self, from: data)) }
+            if response.statusCode == 202 {
+                let decoded = try? JSONDecoder().decode(PostPublication.self, from: data)
+                let value = decoded.flatMap { item in
+                    UUID(uuidString: item.postPublicationId) != nil && (item.postId == nil || UUID(uuidString: item.postId!) != nil) ? item : nil
+                }
+                let bodyID = value.flatMap { UUID(uuidString: $0.postPublicationId)?.uuidString.lowercased() }
+                let location = response.value(forHTTPHeaderField: "Location")
+                let locationID = location.flatMap { publicationID(from: $0, instance: credentials.instance) }
+                // An unsafe/mismatched Location must never receive credentials. 202 still succeeded.
+                let consistent = location == nil || (locationID != nil && (bodyID == nil || bodyID == locationID))
+                let id = consistent ? bodyID ?? locationID : nil
+                return PostCreation(post: nil, wasDeferred: true, deferredPublication: bodyID == id ? value : nil, monitorID: id)
+            }
+            throw PostCreationError.uncertain("Risposta inattesa dal server.")
         } catch let error as OpenBookError {
             if case .http(let status, _) = error, (400..<500).contains(status) { throw error }
             throw PostCreationError.uncertain(error.localizedDescription)
         } catch let error as PostCreationError { throw error }
         catch { throw PostCreationError.uncertain(error.localizedDescription) }
+    }
+
+    private func publicationID(from location: String, instance: Instance) -> String? {
+        guard let url = URL(string: location), let parts = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
+        let origin = instance.origin
+        let port = origin.scheme == "https" ? 443 : 80
+        let segments = url.path.split(separator: "/")
+        guard url.scheme == origin.scheme, url.host == origin.host, (url.port ?? port) == (origin.port ?? port),
+              url.user == nil, url.password == nil, parts.query == nil, url.fragment == nil,
+              segments.count == 4, segments[0] == "rest", segments[1] == "v1", segments[2] == "postPublication",
+              let id = UUID(uuidString: String(segments[3])),
+              url.path == "/rest/v1/postPublication/\(segments[3])" else { return nil }
+        return id.uuidString.lowercased()
+    }
+
+    public func postPublication(id: String, credentials: Credentials) async throws -> PostPublication {
+        let value: PostPublication = try await decode(publicationRequest(id: id, credentials: credentials)).0
+        guard value.postPublicationId.lowercased() == id.lowercased(),
+              value.postId == nil || UUID(uuidString: value.postId!) != nil else {
+            throw OpenBookError.message("Lo stato ricevuto non corrisponde all’invio richiesto.")
+        }
+        return value
+    }
+    public func cancelPostPublication(id: String, credentials: Credentials) async throws {
+        var request = try publicationRequest(id: id, credentials: credentials)
+        request.httpMethod = "DELETE"
+        let (_, response) = try await response(request)
+        guard response.statusCode == 204 else { throw OpenBookError.message("Annullamento non confermato. Aggiorna lo stato dell’invio.") }
+    }
+    private func publicationRequest(id: String, credentials: Credentials) throws -> URLRequest {
+        guard UUID(uuidString: id) != nil else { throw OpenBookError.message("Identificativo dell’invio non valido.") }
+        return authorizedRequest(path: "/rest/v1/postPublication/\(id.lowercased())", credentials: credentials)
     }
 
     public func post(id: String, credentials: Credentials) async throws -> Post {
@@ -355,11 +424,14 @@ public struct APIClient: Sendable {
         catch { throw OpenBookError.message("La risposta non corrisponde al formato API atteso. La specifica potrebbe essere cambiata.") }
     }
 
-    private func response(_ input: URLRequest, tokenExchange: Bool = false) async throws -> (Data, HTTPURLResponse) {
+    private func response(_ input: URLRequest, tokenExchange: Bool = false, uploadFile: URL? = nil) async throws -> (Data, HTTPURLResponse) {
         var request = input
         request.setValue("application/json, application/problem+json", forHTTPHeaderField: "Accept")
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        let (data, rawResponse) = try await session.data(for: request)
+        let data: Data
+        let rawResponse: URLResponse
+        if let uploadFile { (data, rawResponse) = try await session.upload(for: request, fromFile: uploadFile) }
+        else { (data, rawResponse) = try await session.data(for: request) }
         guard let response = rawResponse as? HTTPURLResponse else { throw OpenBookError.message("Risposta del server non valida.") }
         guard (200..<300).contains(response.statusCode) else {
             let problem = try? JSONDecoder().decode(Problem.self, from: data)
